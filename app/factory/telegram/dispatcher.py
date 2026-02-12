@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 from app.factory import create_session_pool
 from app.models.config import AppConfig
 from app.services import UserService, TopicService
+from .i18n import setup_i18n_middleware
 
 
 def create_dispatcher(config: AppConfig) -> Dispatcher:
@@ -24,5 +25,6 @@ def create_dispatcher(config: AppConfig) -> Dispatcher:
         topic_service=TopicService(session_pool=session_pool, config=config),
     )
 
+    setup_i18n_middleware()  # Stub
     # TODO : will include routers and middlewares
     return dispatcher
